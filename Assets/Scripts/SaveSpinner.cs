@@ -27,14 +27,14 @@ public class SaveSpinner : MonoBehaviour
         accContoller += Vector3.one * 5;
 
 
-        rotAcc.x = (Mathf.Sin((accContoller.x * Mathf.PI) / 180)) / 75;
-        rotAcc.y = (Mathf.Sin(((accContoller.y + 90) * Mathf.PI) / 180)) / 75;
+        //rotAcc.x = (Mathf.Sin((accContoller.x * Mathf.PI) / 180)) / 75;
 
-        if(slowDown > 0)
+        if (slowDown > 0)
         {
             rotSpeed.y -= 0.01f;
             slowDown -= 0.01f;
         }
+    
 
         if(slowDown > 5)
         {

@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    public Scene newScene;
+    public string newScene;
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +21,9 @@ public class SceneChanger : MonoBehaviour
 
     void OnTriggerEnter(Collider col)
     {
-        //if (col.gameObject.tag == "Player")
-        //{
-        //    GameManager.me.SceneChange(newScene);
-        //}
-        SceneManager.LoadScene("Tower_Entrance");
+        if (col.gameObject.tag == "Player")
+        {
+            GameManager.me.SceneChange(newScene);
+        }
     }
 }

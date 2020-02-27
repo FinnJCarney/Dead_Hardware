@@ -23,8 +23,8 @@ public class MoveBlock : MonoBehaviour
     {
         if(move && (moveAmount > 0))
         {
-            moveAmount -= 0.01f;
-            transform.position -= new Vector3(0, 0.01f, 0);
+            moveAmount -= 0.025f;
+            transform.position -= new Vector3(0, -0.025f, 0);
         }
     }
 }

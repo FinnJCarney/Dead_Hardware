@@ -14,15 +14,15 @@ public class PlayerMovement : MonoBehaviour
     public float moveSpeed;
     public float rotateSpeed;
 
-    bool w;
-    bool s;
-    bool a;
-    bool d;
+    public bool w;
+    public bool s;
+    public bool a;
+    public bool d;
 
-    bool reverse;
+    public bool reverse;
 
-    bool noVel;
-    bool noRot;
+    public bool noVel;
+    public bool noRot;
 
     void Awake()
     {
@@ -124,13 +124,12 @@ public class PlayerMovement : MonoBehaviour
             velocity = Vector3.zero;
         }
 
-        if(a || (d && reverse))
+        if((a && !reverse) || (d && reverse))
         {
             rotation = -rotateSpeed;
-
         }
 
-        if (d || (a && reverse))
+        if ((d && !reverse)|| (a && reverse))
         {
             rotation = rotateSpeed;
         }

@@ -7,8 +7,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager me;
     // Start is called before the first frame update
-    public Scene nextScene;
-    public string loadScene;
+    public string nextScene;
 
     private void Awake()
     {
@@ -26,9 +25,9 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public void SceneChange(Scene newScene)
+    public void SceneChange(string newScene)
     {
         nextScene = newScene;
-        SceneManager.LoadScene("loadScene");
+        SceneManager.LoadScene("LoadingScreen");
     }
 }

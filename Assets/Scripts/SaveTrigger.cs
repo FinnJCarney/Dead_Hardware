@@ -30,30 +30,33 @@ public class SaveTrigger : MonoBehaviour
         {
             SaveTeleporter();
         }
+    }
 
-        if(timer)
+    void FixedUpdate()
+    {
+        if (timer)
         {
             time++;
         }
 
-        if (time > 0 && time < 180)
+        if (time > 0 && time < 120)
         {
             tm.text = texts[0];
         }
-        if (time > 180 && time < 300)
+        if (time > 120 && time < 240)
         {
             tm.text = texts[1];
         }
-        if (time > 300 && time < 420)
+        if (time > 240 && time < 360)
         {
             tm.text = texts[2];
         }
-        if (time > 420 && time < 422)
+        if (time > 360 && time < 420)
         {
             PlayerMovement.me.transform.position = playerEndPos;
             PlayerMovement.me.transform.eulerAngles = Vector3.zero;
         }
-        if (time > 480)
+        if (time > 420)
         {
             mb.move = true;
         }
