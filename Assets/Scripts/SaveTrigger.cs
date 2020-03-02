@@ -20,7 +20,7 @@ public class SaveTrigger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -29,6 +29,10 @@ public class SaveTrigger : MonoBehaviour
         if(playerIn && Input.GetKeyDown(KeyCode.F))
         {
             SaveTeleporter();
+            if(GameManager.me.stateTracker == 0)
+            {
+                GameManager.me.stateTracker = 1;
+            }
         }
     }
 

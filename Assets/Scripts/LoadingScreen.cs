@@ -32,7 +32,7 @@ public class LoadingScreen : MonoBehaviour
             }
         }
 
-        if(loadBars >= 9)
+        if(loadBars > loadingBarsMR.Length)
         {
             ChangeScene();
         }

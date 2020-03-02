@@ -13,10 +13,9 @@ public class CamTrigger : MonoBehaviour
 
     public bool nonStaticPos;
     public Vector3 ogPos;
-    public Vector3 posOffset;
 
-    public GameObject obj1;
-    public GameObject obj2;
+    public cameraObj[] cameraObjs;
+    public float totalDis;
 
     public float disFraction;
 
@@ -32,19 +31,32 @@ public class CamTrigger : MonoBehaviour
     {
         if (nonStaticAng || nonStaticPos)
         {
-            float disToObj1 = Vector3.Distance(CameraController.me.transform.position, obj1.transform.position);
-            float disToObj2 = Vector3.Distance(CameraController.me.transform.position, obj2.transform.position);
-            disFraction = disToObj1 / (disToObj1 + disToObj2);
+            totalDis = 0;
+            for (int i = 0; i < cameraObjs.Length; i++)
+            {
+                cameraObjs[i].disToObj = 1 / Vector3.Distance(CameraController.me.transform.position, cameraObjs[i].obj.transform.position);
+                totalDis += cameraObjs[i].disToObj;
+            }
         }
 
         if(nonStaticAng)
         {
-            myCam.transform.eulerAngles = ogAng + (angOffset * disFraction);
+            Vector3 newAng = Vector3.zero;
+            for (int i = 0; i < cameraObjs.Length; i++)
+            {
+                newAng += (cameraObjs[i].rotOffset * (cameraObjs[i].disToObj / totalDis));
+            }
+            myCam.transform.eulerAngles = ogAng + newAng;
         }
 
         if(nonStaticPos)
         {
-            myCam.transform.position = ogPos + (posOffset * disFraction);
+            Vector3 newPos = Vector3.zero;
+            for (int i = 0; i < cameraObjs.Length; i++)
+            {
+                newPos += (cameraObjs[i].posOffset * (cameraObjs[i].disToObj / totalDis));
+            }
+            myCam.transform.position = ogPos + newPos;
         }
 
     }
@@ -62,4 +74,13 @@ public class CamTrigger : MonoBehaviour
     {
         CameraController.me.ExitTrigger();
     }
+}
+
+[System.Serializable]
+public struct cameraObj
+{
+    public GameObject obj;
+    public float disToObj;
+    public Vector3 posOffset;
+    public Vector3 rotOffset;
 }

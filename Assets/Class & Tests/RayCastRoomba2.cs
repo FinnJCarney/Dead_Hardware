@@ -22,15 +22,18 @@ public class RayCastRoomba2 : MonoBehaviour
     public GameObject pDObjDisplay;
     public GameObject pObj;
     public float pDMaxDistance;
+    bool couldSeePlayer;
     bool canSeePlayer;
 
-    Vector3 pDirection;
+    public Vector3 pDirection;
 
     int timer;
 
+    public float angle;
+
     void Awake()
     {
-        //pObj = PlayerMovement.me;
+        //pObj = PlayerMovement.me.gameObject;
     }
 
     void Update()
@@ -39,7 +42,7 @@ public class RayCastRoomba2 : MonoBehaviour
         PlayerDetectionRay();
         HeadTurner();
         CloseRangeRays();
-        Movement();      
+        Movement();
     }
 
     void FixedUpdate()
@@ -78,11 +81,11 @@ public class RayCastRoomba2 : MonoBehaviour
             if(pDHit.collider.tag == "Player")
             {
                 pDirection = new Vector3(transform.eulerAngles.x, pDObj.transform.eulerAngles.y, transform.eulerAngles.z);
-                canSeePlayer = true;
+                couldSeePlayer = true;
             }
             else
             {
-                canSeePlayer = false;
+                couldSeePlayer = false;
             }
         }
     }
@@ -90,13 +93,15 @@ public class RayCastRoomba2 : MonoBehaviour
     //Turns the Head and activates canSeePlayer if they are in front of the monster
     void HeadTurner()
     {
-        if(Mathf.Abs(transform.rotation.y) - Mathf.Abs(pDirection.y) < 90 && canSeePlayer)
+        if(couldSeePlayer)
         {
             pDObjDisplay.transform.rotation = pDObj.transform.rotation;
+            canSeePlayer = true;
         }
         else
         {
             pDObjDisplay.transform.eulerAngles = transform.eulerAngles;
+            canSeePlayer = false;
         }
     }
 
@@ -104,8 +109,8 @@ public class RayCastRoomba2 : MonoBehaviour
     {
         // Define Ray
 
-        Ray roombaRayL = new Ray(transform.position, transform.forward - transform.right);
-        Ray roombaRayR = new Ray(transform.position, transform.forward + transform.right);
+        Ray roombaRayL = new Ray(transform.position + (Vector3.up * 4), transform.forward - transform.right);
+        Ray roombaRayR = new Ray(transform.position + (Vector3.up * 4), transform.forward + transform.right);
 
         // Draw Debug Ray
         Debug.DrawRay(roombaRayL.origin, roombaRayL.direction * maxDistance, Color.cyan);
@@ -157,18 +162,11 @@ public class RayCastRoomba2 : MonoBehaviour
         {
             if(canSeePlayer && !onlyMove)
             {
-                transform.eulerAngles = pDirection;
-                //Debug.Log("Trying to Rotate");
-                //if (Mathf.Abs(transform.eulerAngles.y + pDirection.y) > 30)
-                //{
-                //    Debug.Log("Trying to Rotate Postivly");
-                //    transform.Rotate(0, rotSpeed, 0);
-                //}
-                //else if(Mathf.Abs(transform.eulerAngles.y - pDirection.y) > 30)
-                //{
-                //    Debug.Log("Trying to Rotate Negativly");
-                //    transform.Rotate(0, -rotSpeed, 0);
-                //}
+                //transform.eulerAngles = pDirection;    
+                Debug.Log("Trying to Rotate");
+                Vector3 pDir = pObj.transform.position - transform.position;
+                Vector3 nDir = Vector3.RotateTowards(transform.forward, pDir, 0.025f, 0.0f);
+                transform.rotation = Quaternion.LookRotation(nDir);
             }
             transform.Translate(0, 0, Time.deltaTime * speed);
         }

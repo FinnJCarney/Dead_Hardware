@@ -9,10 +9,21 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     public string nextScene;
 
+    public int stateTracker;
+
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
-        me = this;
+        if(me != null)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            DontDestroyOnLoad(this.gameObject);
+            me = this;
+        }
+
+        
     }
     void Start()
     {

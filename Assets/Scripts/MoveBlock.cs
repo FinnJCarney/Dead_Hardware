@@ -10,7 +10,11 @@ public class MoveBlock : MonoBehaviour
 
     void Start()
     {
-        
+        if(GameManager.me.stateTracker > 0)
+        {
+            transform.position += new Vector3(0, moveAmount, 0);
+            moveAmount = 0;
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +28,7 @@ public class MoveBlock : MonoBehaviour
         if(move && (moveAmount > 0))
         {
             moveAmount -= 0.025f;
-            transform.position -= new Vector3(0, -0.025f, 0);
+            transform.position += new Vector3(0, 0.025f, 0);
         }
     }
 }

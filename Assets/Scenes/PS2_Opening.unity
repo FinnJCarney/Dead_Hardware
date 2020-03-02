@@ -14,10 +14,10 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 9
-  m_Fog: 0
-  m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
-  m_FogMode: 3
-  m_FogDensity: 0.01
+  m_Fog: 1
+  m_FogColor: {r: 1, g: 0.2875443, b: 0, a: 1}
+  m_FogMode: 2
+  m_FogDensity: 0.00025
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
@@ -27,7 +27,7 @@ RenderSettings:
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 060253642e6939d4e9ef21d926bbaa3f, type: 2}
-  m_HaloStrength: 0.5
+  m_HaloStrength: 0.465
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
   m_HaloTexture: {fileID: 0}
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -498,6 +498,56 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e41984d4a743cfa45950f4f649e1b5c4, type: 3}
+--- !u!1 &187213699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 187213701}
+  - component: {fileID: 187213700}
+  m_Layer: 0
+  m_Name: SManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &187213700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187213699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1f7246005799c43a62516d2d6deb5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  states:
+  - state: 0
+    pos: {x: -0.38, y: 32.16, z: -11.04}
+    rot: {x: 0, y: -185, z: 0}
+  - state: 1
+    pos: {x: 2.2, y: -83.14, z: 8.7}
+    rot: {x: 0, y: -180, z: 0}
+--- !u!4 &187213701
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 187213699}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 56.56011, y: 42.501007, z: 5.2479258}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 23
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!20 &279363851 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 6346291792024656755, guid: b0ee045c07239c8449dd780359a9564f,
@@ -1867,13 +1917,13 @@ GameObject:
   - component: {fileID: 1193421962}
   m_Layer: 0
   m_Name: Cylinder
-  m_TagString: Untagged
+  m_TagString: Floor
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!136 &1193421962
-CapsuleCollider:
+--- !u!64 &1193421962
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1882,10 +1932,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &1193421963
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2928,12 +2978,12 @@ PrefabInstance:
     - target: {fileID: 3321520923134283821, guid: ac0031ab86c70d94a9bc8ead6b529ed1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 31.82
+      value: 32.16
       objectReference: {fileID: 0}
     - target: {fileID: 3321520923134283821, guid: ac0031ab86c70d94a9bc8ead6b529ed1,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -12.23
+      value: -11.04
       objectReference: {fileID: 0}
     - target: {fileID: 3321520923134283821, guid: ac0031ab86c70d94a9bc8ead6b529ed1,
         type: 3}

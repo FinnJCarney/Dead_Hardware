@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
     public bool noVel;
     public bool noRot;
 
+    public float maxRayDis;
+    public float floorOffset;
+
     void Awake()
     {
         me = this;
@@ -42,7 +45,8 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        Movement();
+        //FloorCast();
+        Movement();    
     }
 
     void Inputs()
@@ -106,9 +110,6 @@ public class PlayerMovement : MonoBehaviour
 
     void Movement()
     {
-        transform.Rotate(0, rotation, 0);
-        rb.MovePosition(transform.position + velocity);
-
         if (w)
         {
             velocity = transform.forward * moveSpeed;
@@ -138,5 +139,8 @@ public class PlayerMovement : MonoBehaviour
         {
             rotation = 0;
         }
+
+        transform.Rotate(0, rotation, 0);
+        rb.MovePosition(transform.position + velocity);
     }
 }

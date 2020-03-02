@@ -6,7 +6,7 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PS2-Opening.unity
+    path: Assets/Scenes/PS2_Opening.unity
     guid: 8e79443f8690ad444bb54d0bf1a10c81
   - enabled: 1
     path: Assets/Scenes/Tower_Entrance.unity
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/LoadingScreen.unity
     guid: 5b1d6532d4fcfe447836118901c0e8c3
+  - enabled: 1
+    path: Assets/Scenes/Tower_Streets.unity
+    guid: 4455cb2ae403d3241b64bb85b80809c7
   m_configObjects: {}
