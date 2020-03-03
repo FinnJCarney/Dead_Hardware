@@ -36,9 +36,16 @@ public class CameraController : MonoBehaviour
         minDistance = Mathf.Infinity;
         for (int i = 0; i < cameras.Length; i++)
         {
-            cameras[i].distanceToPlayer = Mathf.Abs(Vector3.Distance(this.transform.position, cameras[i].myCam.transform.position));
-            minDistance = Mathf.Min(cameras[i].distanceToPlayer, minDistance);
-            Debug.Log("Checked Camera " + i + " , minDistance = " + minDistance);
+            if (cameras[i].myScript.canSeePlayer)
+            {
+                cameras[i].distanceToPlayer = Mathf.Abs(Vector3.Distance(this.transform.position, cameras[i].myCam.transform.position));
+                minDistance = Mathf.Min(cameras[i].distanceToPlayer, minDistance);
+                Debug.Log("Checked Camera " + i + " , minDistance = " + minDistance);
+            }
+            else
+            {
+                
+            }
         }
 
         for (int i = 0; i < cameras.Length; i++)
@@ -78,6 +85,7 @@ public class CameraController : MonoBehaviour
 public struct CameraInfo
 {
     public Camera myCam;
+    public AutoCam myScript;
     public float distanceToPlayer;
 }
 

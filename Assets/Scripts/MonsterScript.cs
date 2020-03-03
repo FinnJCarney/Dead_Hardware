@@ -57,6 +57,10 @@ public class MonsterScript : MonoBehaviour
         if (couldSeePlayer)
         {
             DetectionTimer();
+        }
+
+        if(stateOfSeeing == 2)
+        {
             dontMove = true;
         }
         else
@@ -102,7 +106,6 @@ public class MonsterScript : MonoBehaviour
             {
                 pDirection = new Vector3(transform.eulerAngles.x, pDObj.transform.eulerAngles.y, transform.eulerAngles.z);
                 couldSeePlayer = true;
-                stateOfSeeing = 2;
             }
             else
             {
@@ -122,13 +125,17 @@ public class MonsterScript : MonoBehaviour
             stateOfSeeing = 3;
             canSeePlayer = true;
         }
+        else
+        {
+            stateOfSeeing = 2;
+        }
 
     }
 
     //Turns the Head and activates canSeePlayer if they are in front of the monster
     void HeadTurner()
     {
-        if (canSeePlayer)
+        if (couldSeePlayer)
         {
             pDObjDisplay.transform.rotation = pDObj.transform.rotation;
         }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AutoCam : MonoBehaviour
 {
+
+    public bool canSeePlayer;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +15,23 @@ public class AutoCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(CameraController.me.transform.position);
+        transform.LookAt(PlayerMovement.me.transform.position);
+
+        Ray pDRay = new Ray(transform.position, transform.forward);
+        RaycastHit pDHit;
+
+        Debug.DrawRay(pDRay.origin, pDRay.direction * 1000, Color.magenta);
+
+        if (Physics.Raycast(pDRay, out pDHit, 1000))
+        {
+            if (pDHit.collider.tag == "Player")
+            {
+                canSeePlayer = true;
+            }
+            else
+            {
+                canSeePlayer = false;
+            }
+        }
     }
 }

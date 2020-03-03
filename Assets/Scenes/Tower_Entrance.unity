@@ -5541,7 +5541,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 581387729}
   m_LocalRotation: {x: 0.014968968, y: 0.74616677, z: -0.017201988, w: 0.66536844}
-  m_LocalPosition: {x: -0.6970072, y: 2.1494184, z: 0.010782172}
+  m_LocalPosition: {x: -0.617, y: 2.1, z: 0.003}
   m_LocalScale: {x: 0.035286546, y: 0.9555192, z: 0.04285997}
   m_Children: []
   m_Father: {fileID: 880061001}
@@ -8377,9 +8377,16 @@ MonoBehaviour:
   angOffset: {x: -10, y: 0, z: 0}
   nonStaticPos: 1
   ogPos: {x: 0, y: 0, z: 0}
-  posOffset: {x: 0, y: 5, z: 0}
-  obj1: {fileID: 1293079422}
-  obj2: {fileID: 581387729}
+  cameraObjs:
+  - obj: {fileID: 1293079422}
+    disToObj: 0
+    posOffset: {x: 0, y: 5, z: 0}
+    rotOffset: {x: 10, y: 0, z: 0}
+  - obj: {fileID: 581387729}
+    disToObj: 0
+    posOffset: {x: 0, y: -5, z: 0}
+    rotOffset: {x: -10, y: 0, z: 0}
+  totalDis: 0
   disFraction: 0
 --- !u!65 &880060998
 BoxCollider:
@@ -11563,9 +11570,8 @@ MonoBehaviour:
   angOffset: {x: 0, y: 0, z: 0}
   nonStaticPos: 0
   ogPos: {x: 0, y: 0, z: 0}
-  posOffset: {x: 0, y: 0, z: 0}
-  obj1: {fileID: 0}
-  obj2: {fileID: 0}
+  cameraObjs: []
+  totalDis: 0
   disFraction: 0
 --- !u!65 &1153028815
 BoxCollider:
@@ -20614,9 +20620,8 @@ MonoBehaviour:
   angOffset: {x: 0, y: 0, z: 0}
   nonStaticPos: 0
   ogPos: {x: 0, y: 0, z: 0}
-  posOffset: {x: 0, y: 0, z: 0}
-  obj1: {fileID: 0}
-  obj2: {fileID: 0}
+  cameraObjs: []
+  totalDis: 0
   disFraction: 0
 --- !u!65 &1906926184
 BoxCollider:
