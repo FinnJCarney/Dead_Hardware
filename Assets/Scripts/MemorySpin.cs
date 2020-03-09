@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneTrigger : MonoBehaviour
+public class MemorySpin : MonoBehaviour
 {
-    public string newScene;
+    public Vector3 offset;
 
     // Start is called before the first frame update
     void Start()
@@ -18,11 +18,8 @@ public class SceneTrigger : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider col)
+    void FixedUpdate()
     {
-        if(col.gameObject.tag == "Player")
-        {
-            GameManager.me.SceneChange(newScene);
-        }
+        transform.Rotate(offset);
     }
 }

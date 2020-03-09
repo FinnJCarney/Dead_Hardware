@@ -15,6 +15,7 @@ public class SManager : MonoBehaviour
             {
                 PlayerMovement.me.transform.position = states[i].pos;
                 PlayerMovement.me.transform.eulerAngles = states[i].rot;
+                CameraController.me.ChangeCamera(states[i].cam);
             }
         }
     }
@@ -29,6 +30,7 @@ public class SManager : MonoBehaviour
 [System.Serializable]
 public struct states
 {
+    public Camera cam;
     public int state;
     public Vector3 pos;
     public Vector3 rot;

@@ -26,12 +26,12 @@ public class RayCastRoomba : MonoBehaviour
             if(randomNumber < 50)
             {
                 //transform.Rotate(0, 90, 0);
-                transform.Rotate(0, 10, 0);
+                transform.Rotate(0, 50, 0);
             }
             else
             {
                 //transform.Rotate(0, -90, 0);
-                transform.Rotate(0, -10, 0);
+                transform.Rotate(0, 50, 0);
             }
         }
         else

@@ -15,7 +15,7 @@ public class AutoCam : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.LookAt(PlayerMovement.me.transform.position);
+        transform.LookAt(CameraController.me.transform.position);
 
         Ray pDRay = new Ray(transform.position, transform.forward);
         RaycastHit pDHit;
@@ -24,7 +24,7 @@ public class AutoCam : MonoBehaviour
 
         if (Physics.Raycast(pDRay, out pDHit, 1000))
         {
-            if (pDHit.collider.tag == "Player")
+            if (pDHit.collider.tag == "PlayerCamera")
             {
                 canSeePlayer = true;
             }

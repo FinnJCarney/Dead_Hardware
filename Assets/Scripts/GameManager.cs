@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
 
     public int stateTracker;
 
+    public bool Memory1;
+    public bool Memory2;
+    public bool Memory3;
+    
     private void Awake()
     {
         if(me != null)
@@ -41,4 +45,21 @@ public class GameManager : MonoBehaviour
         nextScene = newScene;
         SceneManager.LoadScene("LoadingScreen");
     }
+
+    public void CheckMemories()
+    { 
+        if(Memory1)
+        {
+            Destroy(MemoriesManager.me.Memories1);
+        }
+        if (Memory2)
+        {
+            Destroy(MemoriesManager.me.Memories2);
+        }
+        if (Memory3)
+        {
+            Destroy(MemoriesManager.me.Memories3);
+        }
+    }
+
 }

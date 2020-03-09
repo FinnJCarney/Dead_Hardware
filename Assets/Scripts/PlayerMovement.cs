@@ -11,13 +11,18 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 velocity;
     public float rotation;
 
+    public float baseSpeed;
+    public float sprintSpeed;
     public float moveSpeed;
+    public float baseRotate;
+    public float sprintRotate;
     public float rotateSpeed;
 
     public bool w;
     public bool s;
     public bool a;
     public bool d;
+    public bool space = true;
 
     public bool reverse;
 
@@ -26,6 +31,8 @@ public class PlayerMovement : MonoBehaviour
 
     public float maxRayDis;
     public float floorOffset;
+
+    public int sprintTimer;
 
     void Awake()
     {
@@ -46,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         //FloorCast();
+        SprintTimer();
         Movement();    
     }
 
@@ -89,6 +97,16 @@ public class PlayerMovement : MonoBehaviour
             d = false;
         }
 
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            space = true;
+        }
+
+        if(Input.GetKeyUp(KeyCode.Space))
+        {
+            space = false;
+        }
+
         if(!w && !s)
         {
             noVel = true;
@@ -108,8 +126,31 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
+    void SprintTimer()
+    {
+        if(space)
+        {
+            sprintTimer--;
+        }
+        else if (sprintTimer < 240)
+        {
+            sprintTimer++;
+        }
+    }
+
     void Movement()
     {
+        if(space && sprintTimer > 40)
+        {
+            moveSpeed = sprintSpeed;
+            rotateSpeed = sprintRotate;
+        }
+        else
+        {
+            moveSpeed = baseSpeed;
+            rotateSpeed = baseRotate;
+        }
+
         if (w)
         {
             velocity = transform.forward * moveSpeed;

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Floor
+  - PlayerCamera
+  - CameraTrigger
   layers:
   - Default
   - TransparentFX
@@ -17,9 +19,9 @@ TagManager:
   - Player
   - Floor
   - PlayerTriggers
-  - 
-  - 
-  - 
+  - RENDERTEXTURE
+  - CamTriggers
+  - MonsterWallCollider
   - 
   - 
   - 

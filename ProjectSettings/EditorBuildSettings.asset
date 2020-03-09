@@ -17,4 +17,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tower_Streets.unity
     guid: 4455cb2ae403d3241b64bb85b80809c7
+  - enabled: 1
+    path: Assets/Scenes/Memories_1.unity
+    guid: 5a6c14b6f93e20c4b9f41af7e417b01a
+  - enabled: 1
+    path: Assets/Scenes/Memories_2.unity
+    guid: cc8c2dee7feb3bb4abb1c601e8aac085
+  - enabled: 1
+    path: Assets/Scenes/Memories_3.unity
+    guid: ef3d3d81b1948aa4cb1d9ed52c5a9a76
   m_configObjects: {}

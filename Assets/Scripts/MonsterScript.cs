@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterScript : MonoBehaviour
 {
+    public static MonsterScript me;
+
     //Set Max Distance
     public float maxDistance;
 
@@ -16,13 +18,14 @@ public class MonsterScript : MonoBehaviour
     bool noR;
 
     public bool onlyMove;
-    bool dontMove;
+    public bool dontMove;
 
     //p stands for player, d stands for detector
     public GameObject pDObj;
     public GameObject pDObjDisplay;
     public GameObject pObj;
     public float pDMaxDistance;
+    public float pDMinDistance;
     bool couldSeePlayer;
     bool canSeePlayer;
 
@@ -32,15 +35,19 @@ public class MonsterScript : MonoBehaviour
 
     public float angle;
 
-    public Light light;
+    public Light[] lights;
     public float detectionTimer;
     public Color blue;
     public Color pink;
     public Color red;
     public int stateOfSeeing;
 
+    public bool turningRight;
+    public bool turningLeft;
+
     void Awake()
     {
+        me = this;
         //pObj = PlayerMovement.me;
     }
 
@@ -85,8 +92,8 @@ public class MonsterScript : MonoBehaviour
     void SpeedController()
     {
         float disToP = Vector3.Distance(transform.position, pObj.transform.position);
-        speed = baseSpeed * (disToP / 30);
-        if (speed < minSpeed)
+        speed = baseSpeed * (disToP / pDMaxDistance);
+        if(pDMaxDistance < pDMinDistance)
         {
             speed = minSpeed;
         }
@@ -98,9 +105,9 @@ public class MonsterScript : MonoBehaviour
         Ray pDRay = new Ray(pDObj.transform.position, pDObj.transform.forward);
         RaycastHit pDHit;
 
-        Debug.DrawRay(pDRay.origin, pDRay.direction * pDMaxDistance, Color.magenta);
+        Debug.DrawRay(pDRay.origin, pDRay.direction * 1000, Color.magenta);
 
-        if (Physics.Raycast(pDRay, out pDHit, pDMaxDistance))
+        if (Physics.Raycast(pDRay, out pDHit, 1000))
         {
             if (pDHit.collider.tag == "Player")
             {
@@ -137,27 +144,39 @@ public class MonsterScript : MonoBehaviour
     {
         if (couldSeePlayer)
         {
-            pDObjDisplay.transform.rotation = pDObj.transform.rotation;
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].gameObject.transform.LookAt(PlayerMovement.me.transform);
+            }
         }
         else
         {
-            pDObjDisplay.transform.eulerAngles = transform.eulerAngles;
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].gameObject.transform.eulerAngles = transform.eulerAngles; ;
+            }
         }
 
         if(stateOfSeeing == 1)
         {
-            Debug.Log("Can't See Player");
-            light.color = blue;
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].color = blue;
+            }          
         }
         if(stateOfSeeing == 2)
         {
-            Debug.Log("Can see player a lil");
-            light.color = pink;
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].color = pink;
+            }
         }
         if(stateOfSeeing == 3)
         {
-            Debug.Log("Player Detected");
-            light.color = red;
+            for (int i = 0; i < lights.Length; i++)
+            {
+                lights[i].color = red;
+            }
         }
     }
 
@@ -165,8 +184,11 @@ public class MonsterScript : MonoBehaviour
     {
         // Define Ray
 
-        Ray roombaRayL = new Ray(transform.position, transform.forward - transform.right);
-        Ray roombaRayR = new Ray(transform.position, transform.forward + transform.right);
+        Ray roombaRayL = new Ray(transform.position - (Vector3.up * 3), transform.forward - (transform.right * 0.5f));
+        Ray roombaRayR = new Ray(transform.position - (Vector3.up * 3), transform.forward + (transform.right * 0.5f));
+        RaycastHit RHit;
+        RaycastHit LHit;
+
 
         // Draw Debug Ray
         Debug.DrawRay(roombaRayL.origin, roombaRayL.direction * maxDistance, Color.cyan);
@@ -174,22 +196,28 @@ public class MonsterScript : MonoBehaviour
 
         //Shoot RayCast
 
-        if (Physics.Raycast(roombaRayL, maxDistance))
+        if (Physics.Raycast(roombaRayL, out LHit, maxDistance))
         {
-            noL = false;
-            onlyMove = true;
-            timer = 0;
+            if (LHit.collider.tag != "Floor")
+            {
+                noL = false;
+                onlyMove = true;
+                timer = 0;
+            }
         }
         else
         {
             noL = true;
         }
 
-        if (Physics.Raycast(roombaRayR, maxDistance))
-        {            
-            noR = false;
-            onlyMove = true;
-            timer = 0;
+        if (Physics.Raycast(roombaRayR, out RHit, maxDistance))
+        {
+            if (RHit.collider.tag != "Floor")
+            {
+                noR = false;
+                onlyMove = true;
+                timer = 0;
+            }
         }
         else
         {
@@ -199,26 +227,6 @@ public class MonsterScript : MonoBehaviour
 
     void Movement()
     {
-        if (!noL)
-        {
-            transform.Rotate(0, rotSpeed, 0);
-        }
-
-        if(!noR)
-        {
-            transform.Rotate(0, -rotSpeed, 0);
-        }
-
-        if (transform.eulerAngles.x != 0)
-        {
-            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
-        }
-
-        if (transform.eulerAngles.z != 0)
-        {
-            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
-        }
-
         if (!noR && !noL)
         {
             int randomChance = Random.Range(0, 100);
@@ -232,14 +240,44 @@ public class MonsterScript : MonoBehaviour
             }
         }
 
+        if (!noL && noR)
+        {
+            transform.Rotate(0, rotSpeed, 0);
+            turningRight = true;
+        }
+        else
+        {
+            turningRight = false;
+        }
+
+        if(!noR && noL)
+        {
+            transform.Rotate(0, -rotSpeed, 0);
+            turningLeft = true;
+        }
+        else
+        {
+            turningLeft = false;
+        }
+
+        if (transform.eulerAngles.x != 0)
+        {
+            transform.eulerAngles = new Vector3(0, transform.eulerAngles.y, transform.eulerAngles.z);
+        }
+
+        if (transform.eulerAngles.z != 0)
+        {
+            transform.eulerAngles = new Vector3(transform.eulerAngles.x, transform.eulerAngles.y, 0);
+        }
+
+
         if (noR && noL)
         {
             if (canSeePlayer && !onlyMove)
             {
                 //transform.eulerAngles = pDirection;    
-                Debug.Log("Trying to Rotate");
                 Vector3 pDir = pObj.transform.position - transform.position;
-                Vector3 nDir = Vector3.RotateTowards(transform.forward, pDir, 0.025f, 0.0f);
+                Vector3 nDir = Vector3.RotateTowards(transform.forward, pDir, 0.02f, 0.0f);
                 transform.rotation = Quaternion.LookRotation(nDir);
             }
             transform.Translate(0, 0, Time.deltaTime * speed);

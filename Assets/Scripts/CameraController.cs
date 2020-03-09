@@ -11,6 +11,10 @@ public class CameraController : MonoBehaviour
     public CameraInfo[] cameras;
     public float minDistance;
 
+    public Camera currentCam;
+    public Camera mainCamera;
+    public RenderTexture rT;
+
     void Awake()
     {
         StaticMe();       
@@ -19,7 +23,10 @@ public class CameraController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Camera.main.enabled = false;
+        mainCamera.enabled = true;
+
+        transform.position = PlayerMovement.me.transform.position;
     }
 
     // Update is called once per frame
@@ -29,6 +36,8 @@ public class CameraController : MonoBehaviour
         {
             SetAutoCamera();
         }
+
+        transform.position = Vector3.Lerp(transform.position, PlayerMovement.me.transform.position + (PlayerMovement.me.transform.forward * 5), 0.05f);
     }
 
     public void SetAutoCamera()
@@ -40,7 +49,6 @@ public class CameraController : MonoBehaviour
             {
                 cameras[i].distanceToPlayer = Mathf.Abs(Vector3.Distance(this.transform.position, cameras[i].myCam.transform.position));
                 minDistance = Mathf.Min(cameras[i].distanceToPlayer, minDistance);
-                Debug.Log("Checked Camera " + i + " , minDistance = " + minDistance);
             }
             else
             {
@@ -50,18 +58,21 @@ public class CameraController : MonoBehaviour
 
         for (int i = 0; i < cameras.Length; i++)
         {
-            if(cameras[i].distanceToPlayer == minDistance)
+            if (cameras[i].distanceToPlayer == minDistance)
             {
+                cameras[i].myCam.enabled = true;
                 ChangeCamera(cameras[i].myCam);
-                Debug.Log("Attempting to Change Camera to " + i);
+            }
+            else if (minDistance != Mathf.Infinity)
+            {
+                cameras[i].myCam.enabled = false;
             }
         }
     }
 
     public void ChangeCamera(Camera newCam)
     {
-        Camera.main.enabled = false;
-        newCam.enabled = true;
+        newCam.targetTexture = rT;
     }
 
     void StaticMe()
