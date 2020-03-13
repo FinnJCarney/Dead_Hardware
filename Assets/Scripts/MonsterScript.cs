@@ -19,6 +19,7 @@ public class MonsterScript : MonoBehaviour
 
     public bool onlyMove;
     public bool dontMove;
+    public bool killing;
 
     //p stands for player, d stands for detector
     public GameObject pDObj;
@@ -44,6 +45,9 @@ public class MonsterScript : MonoBehaviour
 
     public bool turningRight;
     public bool turningLeft;
+
+    public AudioSource as1;
+    public AudioSource as2;
 
     void Awake()
     {
@@ -74,7 +78,7 @@ public class MonsterScript : MonoBehaviour
         {
             dontMove = false;
         }
-        if (!dontMove)
+        if (!dontMove && !killing)
         {
             Movement();
         }
@@ -93,7 +97,7 @@ public class MonsterScript : MonoBehaviour
     {
         float disToP = Vector3.Distance(transform.position, pObj.transform.position);
         speed = baseSpeed * (disToP / pDMaxDistance);
-        if(pDMaxDistance < pDMinDistance)
+        if(speed < minSpeed)
         {
             speed = minSpeed;
         }
@@ -127,7 +131,7 @@ public class MonsterScript : MonoBehaviour
     void DetectionTimer()
     {
         detectionTimer++;
-        if(detectionTimer > 60)
+        if(detectionTimer > 90)
         {
             stateOfSeeing = 3;
             canSeePlayer = true;
@@ -162,6 +166,7 @@ public class MonsterScript : MonoBehaviour
             for (int i = 0; i < lights.Length; i++)
             {
                 lights[i].color = blue;
+                as1.Play();
             }          
         }
         if(stateOfSeeing == 2)
@@ -169,6 +174,7 @@ public class MonsterScript : MonoBehaviour
             for (int i = 0; i < lights.Length; i++)
             {
                 lights[i].color = pink;
+                as2.Play();
             }
         }
         if(stateOfSeeing == 3)
@@ -223,6 +229,11 @@ public class MonsterScript : MonoBehaviour
         {
             noR = true;
         }
+    }
+
+    public void Kill()
+    {
+       killing = true;
     }
 
     void Movement()

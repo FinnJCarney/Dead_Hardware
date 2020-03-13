@@ -14,7 +14,14 @@ public class GameManager : MonoBehaviour
     public bool Memory1;
     public bool Memory2;
     public bool Memory3;
-    
+
+    public bool dead;
+    public int timer;
+
+    public bool MemoriesComplete;
+
+    public AudioSource aS;
+
     private void Awake()
     {
         if(me != null)
@@ -31,13 +38,19 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        
+        aS = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(dead)
+        {
+            if(Input.GetKeyDown(KeyCode.F))
+            {
+                SceneChange("Tower_Streets");
+            }
+        }
     }
 
     public void SceneChange(string newScene)
@@ -60,6 +73,16 @@ public class GameManager : MonoBehaviour
         {
             Destroy(MemoriesManager.me.Memories3);
         }
+
+        if(Memory1 && Memory2 && Memory3)
+        {
+            MemoriesComplete = true;
+        }
+    }
+
+    public void Kill()
+    {
+        dead = true;
     }
 
 }

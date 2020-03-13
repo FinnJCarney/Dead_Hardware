@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class MonsterAnimation : MonoBehaviour
 {
+    public static MonsterAnimation me;
+
     public GameObject LeftSpinner;
     public GameObject FLLeg;
     public GameObject BLLeg;
@@ -12,10 +14,14 @@ public class MonsterAnimation : MonoBehaviour
     public GameObject FRLeg;
     public GameObject BRLeg;
 
-    // Start is called before the first frame update
-    void Start()
-    {
+    public bool killing;
 
+    public int timer;
+    public Vector3 offset;
+
+    void Awake()
+    {
+        me = this;
     }
 
     // Update is called once per frame
@@ -26,12 +32,12 @@ public class MonsterAnimation : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (!MonsterScript.me.dontMove)
+        if (!MonsterScript.me.dontMove && !killing)
         {
             if (!MonsterScript.me.turningLeft)
             {
                 LeftSpinner.transform.Rotate(-2, 0, 0);
-                
+
             }
             else
             {
@@ -51,5 +57,23 @@ public class MonsterAnimation : MonoBehaviour
             FRLeg.transform.eulerAngles = Vector3.zero;
             BRLeg.transform.eulerAngles = Vector3.zero;
         }
+
+        if (killing)
+        {
+            if(timer > 0)
+            {
+                timer--;
+                transform.position -= offset;
+                FLLeg.transform.position += offset;
+                BLLeg.transform.position  += offset;
+                FRLeg.transform.position  += offset;
+                BRLeg.transform.position  += offset;
+            }
+        }
+    }
+
+    public void Kill()
+    {
+        killing = true;
     }
 }

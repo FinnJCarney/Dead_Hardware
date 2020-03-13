@@ -34,6 +34,9 @@ public class PlayerMovement : MonoBehaviour
 
     public int sprintTimer;
 
+    public bool goingUp;
+    public Vector3 vertVelcity;
+
     void Awake()
     {
         me = this;
@@ -52,9 +55,24 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //FloorCast();
         SprintTimer();
         Movement();    
+    }
+
+    public void Kill()
+    {
+        baseSpeed = 0.01f;
+        sprintSpeed = 0.01f;
+    }
+
+    public void Ending(float newSpd)
+    {
+        if(!goingUp)
+        {
+            goingUp = true;
+            rb.isKinematic = true;
+        }
+        vertVelcity.y = newSpd;
     }
 
     void Inputs()
@@ -182,6 +200,13 @@ public class PlayerMovement : MonoBehaviour
         }
 
         transform.Rotate(0, rotation, 0);
-        rb.MovePosition(transform.position + velocity);
+        if (!goingUp)
+        {
+            rb.MovePosition(transform.position + velocity);
+        }
+        else if(transform.position.y < 550)
+        {
+            transform.position += vertVelcity;
+        }
     }
 }

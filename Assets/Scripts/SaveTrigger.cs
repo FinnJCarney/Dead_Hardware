@@ -17,6 +17,9 @@ public class SaveTrigger : MonoBehaviour
 
     public MoveBlock mb;
 
+    public AudioSource as1;
+    public AudioSource as2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,26 +46,46 @@ public class SaveTrigger : MonoBehaviour
             time++;
         }
 
-        if (time > 0 && time < 120)
+        if (!GameManager.me.MemoriesComplete)
         {
-            tm.text = texts[0];
+            if (time > 0 && time < 120)
+            {
+                tm.text = texts[0];
+            }
+            if (time > 120 && time < 240)
+            {
+                tm.text = texts[1];
+            }
+            if (time > 240 && time < 360)
+            {
+                tm.text = texts[2];
+            }
+            if (time > 360 && time < 420)
+            {
+                as1.Stop();
+                as2.Stop();
+                PlayerMovement.me.transform.position = playerEndPos;
+                PlayerMovement.me.transform.eulerAngles = Vector3.zero;
+            }
+            if (time > 450)
+            {
+                mb.move = true;
+            }
         }
-        if (time > 120 && time < 240)
+        else
         {
-            tm.text = texts[1];
-        }
-        if (time > 240 && time < 360)
-        {
-            tm.text = texts[2];
-        }
-        if (time > 360 && time < 420)
-        {
-            PlayerMovement.me.transform.position = playerEndPos;
-            PlayerMovement.me.transform.eulerAngles = Vector3.zero;
-        }
-        if (time > 420)
-        {
-            mb.move = true;
+            if(time > 0 && time < 120)
+            {
+                tm.text = texts[0];
+            }
+            if (time > 120 && time < 240)
+            {
+                tm.text = texts[3];
+            }
+            if(time > 240 && time < 360)
+            {
+                tm.text = null;
+            }
         }
     }
 
@@ -87,6 +110,11 @@ public class SaveTrigger : MonoBehaviour
         {
             tm.text = null;
             playerIn = false;
+            if (GameManager.me.MemoriesComplete)
+            {
+                timer = false;
+                time = 0;
+            }
         }
     }
 }

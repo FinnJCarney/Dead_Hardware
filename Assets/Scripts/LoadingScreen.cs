@@ -19,7 +19,7 @@ public class LoadingScreen : MonoBehaviour
     }
     void Start()
     {
-        
+ 
     }
 
     void Update()
@@ -54,6 +54,7 @@ public class LoadingScreen : MonoBehaviour
 
     void ChangeScene()
     {
+        GameManager.me.aS.Play();
         SceneManager.LoadScene(GameManager.me.nextScene);
     }
 }

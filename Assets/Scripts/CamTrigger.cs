@@ -75,9 +75,16 @@ public class CamTrigger : MonoBehaviour
     {
         if (col.gameObject.tag == "Player")
         {
-            myCam.enabled = false;
-            CameraController.me.ExitTrigger();
-            Debug.Log("Exited Sucessfully");
+            if (!PlayerMovement.me.goingUp)
+            {
+                myCam.enabled = false;
+                CameraController.me.ExitTrigger();
+                Debug.Log("Exited Sucessfully");
+            }
+            else if(PlayerMovement.me.transform.position.y > 180)
+            {
+                Destroy(this);
+            }
         }
     }
 }

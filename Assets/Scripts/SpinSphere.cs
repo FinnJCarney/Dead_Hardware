@@ -9,9 +9,12 @@ public class SpinSphere : MonoBehaviour
 
     public Vector3 accContoller;
 
+    public AudioSource aS;
+
     // Start is called before the first frame update
     void Start()
     {
+        aS = GetComponent<AudioSource>();
         ///accContoller = new Vector3(Random.Range(0, 180), Random.Range(0, 180), Random.Range(0, 180));
         rotSpeed = new Vector3(Random.Range(-1, 1), Random.Range(-1, 1), Random.Range(-1, 1));
     }
