@@ -23,7 +23,7 @@ TagManager:
   - RENDERTEXTURE
   - CamTriggers
   - MonsterWallCollider
-  - 
+  - CamController
   - 
   - 
   - 

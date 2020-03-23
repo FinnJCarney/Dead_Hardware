@@ -77,50 +77,50 @@ public class PlayerMovement : MonoBehaviour
 
     void Inputs()
     {
-        if(Input.GetKeyDown(KeyCode.W))
+        if(Input.GetKeyDown(KeyCode.UpArrow))
         {
             w = true;
         }
-        if(Input.GetKeyUp(KeyCode.W))
+        if(Input.GetKeyUp(KeyCode.UpArrow))
         {
             w = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.S))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             s = true;
             reverse = true;
         }
-        if (Input.GetKeyUp(KeyCode.S))
+        if (Input.GetKeyUp(KeyCode.DownArrow))
         {
             s = false;
             reverse = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
             a = true;
         }
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
             a = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             d = true;
         }
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
             d = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.X))
         {
             space = true;
         }
 
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(Input.GetKeyUp(KeyCode.X))
         {
             space = false;
         }

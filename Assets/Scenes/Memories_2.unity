@@ -23,7 +23,7 @@ RenderSettings:
   m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
-  m_AmbientIntensity: 1
+  m_AmbientIntensity: 0
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
   m_SkyboxMaterial: {fileID: 2100000, guid: 171b0d5383c56f9459e5730a503d642a, type: 2}
@@ -71,7 +71,7 @@ LightmapSettings:
     m_FinalGatherFiltering: 1
     m_FinalGatherRayCount: 256
     m_ReflectionCompression: 2
-    m_MixedBakeMode: 2
+    m_MixedBakeMode: 0
     m_BakeBackend: 1
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -419,6 +419,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1679523271}
+  - {fileID: 913673251}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 12.652, y: -2.0730002, z: -0.013}
@@ -525,7 +526,7 @@ GameObject:
   - component: {fileID: 913673251}
   - component: {fileID: 913673253}
   - component: {fileID: 913673252}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -540,11 +541,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 913673250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.36, y: -4.2, z: 23.58}
-  m_LocalScale: {x: 0.14, y: 0.14, z: 0.1}
+  m_LocalPosition: {x: -0, y: -0.215, z: 0.733}
+  m_LocalScale: {x: 0.006, y: 0.006, z: 0.006}
   m_Children: []
-  m_Father: {fileID: 1722989596}
-  m_RootOrder: 0
+  m_Father: {fileID: 395055888}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!102 &913673252
 TextMesh:
@@ -567,7 +568,7 @@ TextMesh:
   m_FontSize: 96
   m_FontStyle: 0
   m_RichText: 1
-  m_Font: {fileID: 12800000, guid: 62a76b535617904489309740f0373626, type: 3}
+  m_Font: {fileID: 12800000, guid: 5e8b04a718121cd43b450061f04bd17f, type: 3}
   m_Color:
     serializedVersion: 2
     rgba: 4278190080
@@ -589,7 +590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 62a76b535617904489309740f0373626, type: 3}
+  - {fileID: 2100000, guid: 5e8b04a718121cd43b450061f04bd17f, type: 3}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -620,6 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 972917979}
   - component: {fileID: 972917976}
+  - component: {fileID: 972917977}
   m_Layer: 0
   m_Name: Dreams
   m_TagString: Untagged
@@ -642,18 +644,115 @@ MonoBehaviour:
   timer: 0
   tm: {fileID: 913673252}
   words:
-  - Hav-- thes weird thougHTS // \\n // any o8 th real
-  - n Havi these weird thougHTS lat  l/ \\n /k s any o8 thi real,
-  - ve bn having these weird thoughtS latel \\n li/e is any of thi real or n
-  - I've been having these weird thoughts lately, \\n like is any of this for real,
+  - Hav-- thes weird thougHTS // \n // any o8 th real
+  - n Havi these weird thougHTS lat  l/ \n /k s any o8 thi real,
+  - ve bn having these weird thoughtS latel \n li/e is any of thi real or n
+  - I've been having these weird thoughts lately, \n like is any of this for real,
     or not?
   - Thank you, traveller
   cords: {fileID: 1023086396}
-  timerStop: 80
+  timerStop: 120
   speed: 0
   offset: 0.0035
   scale: 0.9925
   doorwayInt: 4
+  memoryNumber: 0
+--- !u!82 &972917977
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 972917975}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 240ae5214927332438a72fb05818df51, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!4 &972917979
 Transform:
   m_ObjectHideFlags: 0
@@ -754,7 +853,7 @@ PrefabInstance:
     - target: {fileID: 3321520923134283821, guid: ac0031ab86c70d94a9bc8ead6b529ed1,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 2.35
+      value: 1.85
       objectReference: {fileID: 0}
     - target: {fileID: 3321520923134283821, guid: ac0031ab86c70d94a9bc8ead6b529ed1,
         type: 3}
@@ -1103,8 +1202,7 @@ Transform:
   m_LocalRotation: {x: -0.0003725608, y: 0.9991214, z: 0.04048855, w: 0.010812572}
   m_LocalPosition: {x: -1.0677077, y: 8.526597, z: 41.65905}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 913673251}
+  m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}

@@ -61,13 +61,14 @@ public class CamTrigger : MonoBehaviour
 
     }
 
-    void OnTriggerEnter(Collider col)
+    void OnTriggerStay(Collider col)
     {
         if(col.gameObject.tag == "Player")
         {
-            myCam.enabled = true;
+            //myCam.enabled = true;
             CameraController.me.ChangeCamera(myCam);
-            CameraController.me.EnterTrigger();
+            //CameraController.me.EnterTrigger();
+            Debug.Log(this.gameObject);
         }
     }
 
@@ -77,8 +78,8 @@ public class CamTrigger : MonoBehaviour
         {
             if (!PlayerMovement.me.goingUp)
             {
-                myCam.enabled = false;
-                CameraController.me.ExitTrigger();
+                //myCam.enabled = false;
+                //CameraController.me.ExitTrigger();
                 Debug.Log("Exited Sucessfully");
             }
             else if(PlayerMovement.me.transform.position.y > 180)

@@ -29,7 +29,7 @@ public class SaveTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(playerIn && Input.GetKeyDown(KeyCode.F))
+        if(playerIn && Input.GetKeyDown(KeyCode.X))
         {
             SaveTeleporter();
             if(GameManager.me.stateTracker == 0)
@@ -99,7 +99,7 @@ public class SaveTrigger : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            tm.text = "Press F to Save";
+            tm.text = "Press X to Save";
             playerIn = true;
         }
     }

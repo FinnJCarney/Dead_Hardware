@@ -15,7 +15,7 @@ public class SManager : MonoBehaviour
             {
                 PlayerMovement.me.transform.position = states[i].pos;
                 PlayerMovement.me.transform.eulerAngles = states[i].rot;
-                CameraController.me.ChangeCamera(states[i].cam);
+                CameraController.me.InitCam(states[i].cam);
             }
         }
     }

@@ -7,6 +7,10 @@ public class SceneTrigger : MonoBehaviour
     public int newState;
     public string newScene;
 
+    public int altState;
+
+    public bool initDoorway;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,8 +27,16 @@ public class SceneTrigger : MonoBehaviour
     {
         if(col.gameObject.tag == "Player")
         {
-            GameManager.me.stateTracker = newState;
             GameManager.me.SceneChange(newScene);
+            if (!initDoorway || (initDoorway && !GameManager.me.MemoriesComplete))
+            {
+                GameManager.me.stateTracker = newState;
+                
+            }
+            else
+            {
+                GameManager.me.stateTracker = altState;
+            }
         }
     }
 }

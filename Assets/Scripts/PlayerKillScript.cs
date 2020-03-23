@@ -8,6 +8,7 @@ public class PlayerKillScript : MonoBehaviour
     public MonsterScript ms;
     public MonsterAnimation ma;
     public GameManager gm;
+    public CameraController cc;
 
     public bool dead;
     public int timer;
@@ -19,6 +20,7 @@ public class PlayerKillScript : MonoBehaviour
         ms = MonsterScript.me;
         ma = MonsterAnimation.me;
         gm = GameManager.me;
+        cc = CameraController.me;
 
     }
 
@@ -34,7 +36,7 @@ public class PlayerKillScript : MonoBehaviour
         {
             if (timer < 0)
             {
-                CameraController.me.ChangeCamera(cam);
+                cc.Kill();
                 gm.Kill();
             }
             else
@@ -51,7 +53,7 @@ public class PlayerKillScript : MonoBehaviour
             dead = true;
             pm.Kill();
             ms.Kill();
-            ma.Kill();
+            ma.Kill();           
         }
     }
 }

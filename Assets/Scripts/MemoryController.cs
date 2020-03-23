@@ -19,12 +19,29 @@ public class MemoryController : MonoBehaviour
 
     public int doorwayInt;
 
+    public int memoryNumber;
+
     // Start is called before the first frame update
     void Start()
     {
         for (int i = 0; i < words.Length; i++)
         {
             words[i] = words[i].Replace("\\n", "\n");
+        }
+
+        if(GameManager.me.Memory1)
+        {
+            memoryNumber++;
+        }
+
+        if (GameManager.me.Memory2)
+        {
+            memoryNumber++;
+        }
+
+        if (GameManager.me.Memory3)
+        {
+            memoryNumber++;
         }
     }
 
@@ -64,9 +81,22 @@ public class MemoryController : MonoBehaviour
         }
         if(timer > timerStop * 8)
         {
-            tm.text = words[4];
+            if(memoryNumber == 0)
+            {
+                tm.text = "Thank you, traveller \n Only two more doorways to find";
+            }
+
+            if (memoryNumber == 1)
+            {
+                tm.text = "Thank you, traveller \n Only one more memory to restore";
+            }
+
+            if (memoryNumber == 2)
+            {
+                tm.text = "Thank you, traveller \n Return to whence you came. You have saved us";
+            }
         }
-        if(timer > timerStop * 10)
+        if(timer > timerStop * 12)
         {
             if (doorwayInt == 3)
             {

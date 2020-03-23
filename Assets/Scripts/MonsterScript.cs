@@ -70,14 +70,14 @@ public class MonsterScript : MonoBehaviour
             DetectionTimer();
         }
 
-        if(stateOfSeeing == 2)
-        {
-            dontMove = true;
-        }
-        else
-        {
-            dontMove = false;
-        }
+        //if(stateOfSeeing == 2)
+        //{
+        //    dontMove = true;
+        //}
+        //else
+        //{
+        //    dontMove = false;
+        //}
         if (!dontMove && !killing)
         {
             Movement();

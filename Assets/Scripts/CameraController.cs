@@ -15,6 +15,11 @@ public class CameraController : MonoBehaviour
     public Camera mainCamera;
     public RenderTexture rT;
 
+    public bool kill;
+    public Camera killCam;
+
+    public Rigidbody rb;
+
     void Awake()
     {
         StaticMe();       
@@ -32,12 +37,19 @@ public class CameraController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!inCamTrigger)
+        if (!inCamTrigger)
         {
             SetAutoCamera();
         }
 
-        transform.position = Vector3.Lerp(transform.position, PlayerMovement.me.transform.position + (PlayerMovement.me.transform.forward * 5), 0.05f);
+        if (kill)
+        {
+            currentCam.enabled = false;
+            killCam.enabled = true;
+            killCam.targetTexture = rT;
+        }
+
+        transform.position = Vector3.Lerp(transform.position, PlayerMovement.me.transform.position + (PlayerMovement.me.transform.forward * 2), 0.15f);
     }
 
     public void SetAutoCamera()
@@ -72,7 +84,20 @@ public class CameraController : MonoBehaviour
 
     public void ChangeCamera(Camera newCam)
     {
+        if (newCam != currentCam && !kill)
+        {
+            currentCam.enabled = false;
+            newCam.enabled = true;
+            newCam.targetTexture = rT;
+            currentCam = newCam;
+        }
+    }
+
+    public void InitCam(Camera newCam)
+    {
+        newCam.enabled = true;
         newCam.targetTexture = rT;
+        currentCam = newCam;
     }
 
     void StaticMe()
@@ -80,14 +105,26 @@ public class CameraController : MonoBehaviour
         me = this;
     }
 
-    public void EnterTrigger()
+    public void Kill()
     {
-        inCamTrigger = true;
+        kill = true;
     }
 
-    public void ExitTrigger()
+
+    void OnTriggerStay(Collider col)
     {
-        inCamTrigger = false;
+        if(col.gameObject.tag == "CameraTrigger")
+        {
+            inCamTrigger = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider col)
+    {
+        if (col.gameObject.tag == "CameraTrigger")
+        {
+            inCamTrigger = false;
+        }
     }
 
 }
